@@ -28,16 +28,18 @@ public class CustomerViewJPanel extends javax.swing.JPanel {
     private CustomerDirectory custDir;
     private TicketDirectory ticketDir;
     private TravelOffice office;
+    private MasterTravelSchedule masterSch;
     private JPanel userProcessContainer;
 
     /**
      * Creates new form CustomerViewJPanel
      */
-    public CustomerViewJPanel(JPanel upc, TravelOffice office) {
+    public CustomerViewJPanel(JPanel upc, MasterTravelSchedule ms) {
         initComponents();
-        this.office = office;
-        this.custDir = office.getCustomerDirecotry();
-        this.ticketDir = office.getTicketDirectory();
+        this.masterSch = ms;
+        this.office = ms.getTravelOffice();
+        this.custDir = this.office.getCustomerDirecotry();
+        this.ticketDir = this.office.getTicketDirectory();
         this.userProcessContainer = upc;
         populateTable(custDir);
     }
@@ -85,7 +87,15 @@ public class CustomerViewJPanel extends javax.swing.JPanel {
             new String [] {
                 "ID", "Name", "Gender"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblCustomer);
 
         btnAdd.setText("Add");
@@ -153,7 +163,7 @@ public class CustomerViewJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        CreateCustomerJPanel ccp = new CreateCustomerJPanel(userProcessContainer,office);
+        CreateCustomerJPanel ccp = new CreateCustomerJPanel(userProcessContainer,masterSch);
         userProcessContainer.add("customersview",ccp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -166,7 +176,7 @@ public class CustomerViewJPanel extends javax.swing.JPanel {
             return;
         }
         Customer c = (Customer)tblCustomer.getValueAt(row, 1);
-        CustomerScheduleJPanel csp = new CustomerScheduleJPanel(userProcessContainer,c,office);
+        CustomerScheduleJPanel csp = new CustomerScheduleJPanel(userProcessContainer,c, masterSch);
         userProcessContainer.add("customersview",csp);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

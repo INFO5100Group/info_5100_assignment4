@@ -38,8 +38,8 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     }
     
     private void initData(){
-        this.travelOffice.setCustomerDirecotry(InitEverything.createCustomers());
-        this.travelOffice.setTicketDirectory(InitEverything.createTickets(travelOffice.getCustomerDirecotry()));
+        this.masterTravelschedule.getTravelOffice().setCustomerDirecotry(InitEverything.createCustomers());
+        this.masterTravelschedule.getTravelOffice().setTicketDirectory(InitEverything.createTickets(this.masterTravelschedule.getTravelOffice().getCustomerDirecotry()));
     }
 
     /**
@@ -127,8 +127,7 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
-        CustomerDirectory cd = travelOffice.getCustomerDirecotry();
-        CustomerViewJPanel ccp = new CustomerViewJPanel(UserProcessContainer,travelOffice);
+        CustomerViewJPanel ccp = new CustomerViewJPanel(UserProcessContainer,masterTravelschedule);
         UserProcessContainer.add("customersview",ccp);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
         layout.next(UserProcessContainer);

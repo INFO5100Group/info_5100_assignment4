@@ -27,17 +27,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CustomerScheduleJPanel extends javax.swing.JPanel {
     private JPanel UserProcessContainer;
+    private MasterTravelSchedule masterSch;
     private CustomerDirectory cusd;
     private TicketDirectory tickd;
     private Customer cust;
     /**
      * Creates new form Schedule
      */
-    public CustomerScheduleJPanel(JPanel UserProcessContainer,Customer c, TravelOffice of) {
+    public CustomerScheduleJPanel(JPanel UserProcessContainer,Customer c, MasterTravelSchedule ms) {
         this.cust = c;
         this.UserProcessContainer = UserProcessContainer;
-        this.cusd = of.getCustomerDirecotry();
-        this.tickd = of.getTicketDirectory();
+        this.masterSch = ms;
+        this.cusd = ms.getTravelOffice().getCustomerDirecotry();
+        this.tickd = ms.getTravelOffice().getTicketDirectory();
         initComponents();
         populateCustomer();
         populateTable();
@@ -55,8 +57,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)CustomerTable.getModel();
         model.setRowCount(0);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");  
         for(Ticket t : tickd.getTicketsByCustomer(cust)) {
             Object row[] = new Object[8];
             row[0] = t.getID();
@@ -180,8 +181,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTicketActionPerformed
-        // TODO add your handling code here:
-        SearchTicketJPanel sjp = new SearchTicketJPanel(UserProcessContainer);
+        SearchTicketJPanel sjp = new SearchTicketJPanel(UserProcessContainer, cust, masterSch);
         UserProcessContainer.add("SearchTicketJPanel",sjp);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
         layout.next(UserProcessContainer);

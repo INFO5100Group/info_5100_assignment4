@@ -14,9 +14,11 @@ import Business.Flight.FlightSchedule;
  */
 public class MasterTravelSchedule {
     FlightSchedule flightSchedule;
+    TravelOffice travelOffice;
     
     public MasterTravelSchedule(){
         flightSchedule = new FlightSchedule();
+        travelOffice = new TravelOffice();
     }
 
     public FlightSchedule getFlightSchedule() {
@@ -26,6 +28,13 @@ public class MasterTravelSchedule {
     public void setFlightSchedule(FlightSchedule flightSchedule) {
         this.flightSchedule = flightSchedule;
     }
- 
+
+    public TravelOffice getTravelOffice() {
+        return travelOffice;
+    }
+
+    public void setTravelOffice(TravelOffice travelOffice) {
+        this.travelOffice = travelOffice;
+    }
     
 }

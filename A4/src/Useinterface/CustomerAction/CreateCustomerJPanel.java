@@ -6,6 +6,7 @@
 package Useinterface.CustomerAction;
 
 import Business.Persona.Customer;
+import Business.Travel.MasterTravelSchedule;
 import Business.Travel.TravelOffice;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,8 +21,8 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateCustomer
      */
-    public CreateCustomerJPanel(JPanel UserProcessContainer,TravelOffice to) {
-        this.travelOffice = to;
+    public CreateCustomerJPanel(JPanel UserProcessContainer,MasterTravelSchedule ms) {
+        this.travelOffice = ms.getTravelOffice();
         this.UserProcessContainer = UserProcessContainer;
         initComponents();
     }

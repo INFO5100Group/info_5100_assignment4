@@ -13,10 +13,12 @@ import Business.Airliner.AirlinerDirectory;
  */
 public class TravelAgency {
     
-    public AirlinerDirectory airlinerDirectory;
+    private AirlinerDirectory airlinerDirectory;
+    private MasterTravelSchedule masterTravelSchedule;
     
     public TravelAgency(){
         airlinerDirectory= new AirlinerDirectory();
+        this.masterTravelSchedule = new MasterTravelSchedule();
     }
 
     public AirlinerDirectory getAirlinerDirectory() {
@@ -27,6 +29,12 @@ public class TravelAgency {
         this.airlinerDirectory = airlinerDirectory;
     }
 
+    public MasterTravelSchedule getMasterTravelSchedule() {
+        return masterTravelSchedule;
+    }
 
-    
+    public void setMasterTravelSchedule(MasterTravelSchedule masterTravelSchedule) {
+        this.masterTravelSchedule = masterTravelSchedule;
+    }
+
 }
