@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.Persona;
 
 /**
  *
- * @author Administrator
+ * @author Administrator / Bohan Feng
  */
-public class Customer {
+public class Customer extends Person{
     
+    public Customer(){
+        super();
+    }
+
+    public Customer(String fname, String lname){
+        super(fname, lname);
+    }
+
 }
