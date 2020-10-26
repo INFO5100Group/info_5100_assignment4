@@ -9,34 +9,23 @@ public class Seat {
     public static int seatCount = 0;
 
     private int ID;
-    /** class for seat */
-    private String seatClass;
 
-    /**
-     * Constructor with out class specification
-     */
+    private int SeatNum;
+    private boolean isTaken;
+
+
     public Seat() {
         seatCount ++;
         this.ID = seatCount;
+        isTaken = false;
     }
 
-    /**
-     * constuctor with class specification
-     * @param classNme
-     */
-    public Seat(String classNme){
+    public Seat(int num){
         this();
-        this.seatClass = classNme;
-    }
- 
-    public String getSeatClass() {
-        return this.seatClass;
+        this.SeatNum = num;
     }
 
-    public void setSeatClass(String seatClass) {
-        this.seatClass = seatClass;
-    }
-
+    /**getter and setters */
     public int getID() {
         return this.ID;
     }
@@ -45,12 +34,32 @@ public class Seat {
         this.ID = ID;
     }
 
+    public int getSeatNum() {
+        return this.SeatNum;
+    }
+
+    public void setSeatNum(int SeatNum) {
+        this.SeatNum = SeatNum;
+    }
+
+    public boolean isIsTaken() {
+        return this.isTaken;
+    }
+
+    public boolean getIsTaken() {
+        return this.isTaken;
+    }
+
+    public void setIsTaken(boolean isTaken) {
+        this.isTaken = isTaken;
+    }
 
     @Override
     public String toString() {
         return "{" +
             " ID='" + ID + "'" +
-            ", seatClass='" + seatClass + "'" +
+            ", SeatNum='" + SeatNum + "'" +
+            ", isTaken='" + isTaken + "'" +
             "}";
     }
 

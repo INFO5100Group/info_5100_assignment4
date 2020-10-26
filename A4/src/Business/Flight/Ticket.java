@@ -11,7 +11,7 @@ import Business.Persona.*;
 
 /**
  *
- * @author Administrator
+ * @author Administrator / Bohan Feng
  */
 public class Ticket {
     public static int ticketCount = 0;
@@ -19,6 +19,7 @@ public class Ticket {
     private int ID;
     private Customer ticketCustomer;
     private Seat ticketSeat;
+    private Flight ticketFlight;
     private Date createDate;
     
     public Ticket(){
@@ -26,11 +27,14 @@ public class Ticket {
         this.createDate = new Date();
     }
 
-    public Ticket(Customer c, Seat s){
+    public Ticket(Customer c, Seat s, Flight f){
         this();
         this.ticketCustomer = c;
         this.ticketSeat = s;
+        this.ticketFlight = f;
     }
+
+    /** getter and setters */
 
     public int getID() {
         return this.ID;
@@ -64,5 +68,12 @@ public class Ticket {
         this.ticketCustomer = ticketCustomer;
     }
 
+    public Flight getTicketFlight() {
+        return this.ticketFlight;
+    }
+
+    public void setTicketFlight(Flight ticketFlight) {
+        this.ticketFlight = ticketFlight;
+    }
     
 }
