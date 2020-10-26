@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Business.Airliner;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Administrator
  */
-public class AirlinerDirectory {
+public class AirlinerDirectory extends ArrayList<Airliner> {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    //TODO: add, remove, search, update airliners.
     
 }

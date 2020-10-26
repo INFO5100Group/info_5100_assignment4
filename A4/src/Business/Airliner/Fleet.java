@@ -1,14 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Business.Airliner;
+
+import java.util.ArrayList;
 
 /**
  *
- * @author Administrator
+ * @author Administrator / Bohan Feng
  */
-public class Fleet {
+public class Fleet extends ArrayList<Airplane>{
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    public static int fleetCount;
+    private int ID;
+    private String name;
+
+    //TODO: find, update, remove, add plane
+
+    public Fleet(){
+        fleetCount ++;
+        this.ID = fleetCount;
+    }
+
+    public int getID() {
+        return this.ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    } 
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     
 }
