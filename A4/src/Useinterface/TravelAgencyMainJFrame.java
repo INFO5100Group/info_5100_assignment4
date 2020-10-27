@@ -5,16 +5,29 @@
  */
 package Useinterface;
 
+import Business.Travel.MasterTravelSchedule;
+import Business.Travel.TravelAgency;
+import Business.Travel.TravelOffice;
+import Useinterface.CustomerAction.CreateCustomerJPanel;
+import Useinterface.ManageAirliners.ManageAirlinersJPanel;
+
 /**
  *
  * @author Administrator
  */
 public class TravelAgencyMainJFrame extends javax.swing.JFrame {
-
+    TravelAgency travelAgency;
+    TravelOffice travelOffice;
+    MasterTravelSchedule masterTravelschedule;
+    javax.swing.JPanel CardSequenceJPanel;
     /**
      * Creates new form TravelAgencyMainJFram
      */
-    public TravelAgencyMainJFrame() {
+    public TravelAgencyMainJFrame(javax.swing.JPanel spane, TravelOffice tf, TravelAgency ta,MasterTravelSchedule mt) {
+        CardSequenceJPanel = spane;
+        travelAgency = ta;
+        travelOffice = tf;
+        masterTravelschedule = mt;
         initComponents();
     }
 
@@ -32,6 +45,7 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnAirliners = new javax.swing.JButton();
         btnCustomer = new javax.swing.JButton();
+        btnFlight = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,8 +76,25 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
         jSplitPane1.setLeftComponent(jPanel2);
 
         btnAirliners.setText("ManageAirliners");
+        btnAirliners.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAirlinersActionPerformed(evt);
+            }
+        });
 
         btnCustomer.setText("CreateCustomer");
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerActionPerformed(evt);
+            }
+        });
+
+        btnFlight.setText("CreateFlight");
+        btnFlight.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFlightActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +103,8 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jSplitPane1)
                 .addContainerGap())
@@ -85,11 +117,40 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
                 .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(75, 75, 75)
                 .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
+        // TODO add your handling code here:
+        AirlinerDirectory ad = travelAgency.getAirlinerDirectory();
+        CardSequenceJPanel.removeAll();
+        ManageAirlinersJPanel msjp = new ManageAirlinersJPanel (CardSequencePanel, ad);
+        CardSequencePanel.add("airlinersmanajpanel",msjp);
+        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnAirlinersActionPerformed
+
+    private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
+        // TODO add your handling code here:
+        CustomerDirectory cd = travelOffice.getCustomerDirectory();
+        CardSequenceJPanel.removeAll();
+        CreateCustomerJPanel ccp = new CreateCustomerJPanel (CardSequencePanel, cd);
+        CardSequencePanel.add("customercreajpanel",ccp);
+        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnCustomerActionPerformed
+
+    private void btnFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlightActionPerformed
+        // TODO add your handling code here:
+        MasterTravelSchedule mt = masterTravelschedule.getFlightSchedule;
+        CardSequenceJPanel.removeAll();
+        CreateNewFlightsJPanel cnfp = new CreateNewFlightsJPanel (CardSequencePanel, fs);
+        CardSequencePanel.add("flightcreajpanel",cnfp);
+        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnFlightActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,6 +221,7 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAirliners;
     private javax.swing.JButton btnCustomer;
+    private javax.swing.JButton btnFlight;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;

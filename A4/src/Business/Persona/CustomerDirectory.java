@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 /**
  *
  * @author Administrator / Bohan Feng
+ * add gender
  */
 public class CustomerDirectory extends ArrayList<Customer> {
 
@@ -31,8 +32,8 @@ public class CustomerDirectory extends ArrayList<Customer> {
      * @param lastName last nema
      * @return the customer added to directory
      */
-    public Customer addCustomer(String firstName, String lastName){
-        Customer toAdd = new Customer(firstName, lastName);
+    public Customer addCustomer(String firstName, String lastName,String gender){
+        Customer toAdd = new Customer(firstName, lastName,gender);
         this.add(toAdd);
         return toAdd;
     }
