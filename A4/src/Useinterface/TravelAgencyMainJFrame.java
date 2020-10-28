@@ -5,11 +5,18 @@
  */
 package Useinterface;
 
+import Business.Airliner.AirlinerDirectory;
+import Business.Flight.FlightSchedule;
+import Business.Persona.CustomerDirectory;
 import Business.Travel.MasterTravelSchedule;
 import Business.Travel.TravelAgency;
 import Business.Travel.TravelOffice;
 import Useinterface.CustomerAction.CreateCustomerJPanel;
+import Useinterface.Flight.CreateNewFlightsJPanel;
+import Useinterface.ManageAirliners.CreateNewAirlinerJPanel;
 import Useinterface.ManageAirliners.ManageAirlinersJPanel;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,15 +26,15 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     TravelAgency travelAgency;
     TravelOffice travelOffice;
     MasterTravelSchedule masterTravelschedule;
-    javax.swing.JPanel CardSequenceJPanel;
+    private JPanel UserProcessContainer;
     /**
      * Creates new form TravelAgencyMainJFram
      */
-    public TravelAgencyMainJFrame(javax.swing.JPanel spane, TravelOffice tf, TravelAgency ta,MasterTravelSchedule mt) {
-        CardSequenceJPanel = spane;
-        travelAgency = ta;
-        travelOffice = tf;
-        masterTravelschedule = mt;
+    public TravelAgencyMainJFrame(JPanel UserProcessContainer, TravelOffice tf, TravelAgency ta,MasterTravelSchedule mt) {
+        this.travelAgency = ta;
+        this.travelOffice = tf;
+        this.masterTravelschedule = mt;
+        this.UserProcessContainer = UserProcessContainer;
         initComponents();
     }
 
@@ -75,7 +82,7 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(jPanel2);
 
-        btnAirliners.setText("ManageAirliners");
+        btnAirliners.setText("CreateAirliners");
         btnAirliners.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAirlinersActionPerformed(evt);
@@ -128,28 +135,28 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
         // TODO add your handling code here:
         AirlinerDirectory ad = travelAgency.getAirlinerDirectory();
-        CardSequenceJPanel.removeAll();
-        ManageAirlinersJPanel msjp = new ManageAirlinersJPanel (CardSequencePanel, ad);
-        CardSequencePanel.add("airlinersmanajpanel",msjp);
-        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+        CreateNewAirlinerJPanel cna = new CreateNewAirlinerJPanel(UserProcessContainer,travelAgency);
+        UserProcessContainer.add("CreateNewAirlinerJPanel",cna);
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnAirlinersActionPerformed
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
-        CustomerDirectory cd = travelOffice.getCustomerDirectory();
-        CardSequenceJPanel.removeAll();
-        CreateCustomerJPanel ccp = new CreateCustomerJPanel (CardSequencePanel, cd);
-        CardSequencePanel.add("customercreajpanel",ccp);
-        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+        CustomerDirectory cd = travelOffice.getCustomerDirecotry();
+        CreateCustomerJPanel ccp = new CreateCustomerJPanel(UserProcessContainer,travelOffice);
+        UserProcessContainer.add("customercreajpanel",ccp);
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlightActionPerformed
         // TODO add your handling code here:
-        MasterTravelSchedule mt = masterTravelschedule.getFlightSchedule;
-        CardSequenceJPanel.removeAll();
-        CreateNewFlightsJPanel cnfp = new CreateNewFlightsJPanel (CardSequencePanel, fs);
-        CardSequencePanel.add("flightcreajpanel",cnfp);
-        ((java.awt.CardLayout)CardSequenceJPanel.getLayout()).next(CardSequencePanel);
+        FlightSchedule mt = masterTravelschedule.getFlightSchedule();
+        CreateNewFlightsJPanel cnfp = new CreateNewFlightsJPanel(UserProcessContainer,masterTravelschedule);
+        UserProcessContainer.add("flightcreajpanel",cnfp);
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnFlightActionPerformed
 
     /**

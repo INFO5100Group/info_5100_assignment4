@@ -24,7 +24,7 @@ public class Flight extends ArrayList<Seat> {
     private String flightName;
     private String departure;
     private String destination;
-    private String departurelocation;
+    private String daytime;
     private Date departTime, arriveTime;
 
     private Airplane plane;
@@ -119,13 +119,16 @@ public class Flight extends ArrayList<Seat> {
         return this.plane;
     }
 
-    public String getDeparturelocation() {
-        return departurelocation;
+    public String getDaytime() {
+        return daytime;
     }
 
-    public void setDeparturelocation(String departurelocation) {
-        this.departurelocation = departurelocation;
+    public void setDaytime(String daytime) {
+        this.daytime = daytime;
     }
+    
+
+
     
     /**
      * once plane for flight is defined, define all the seats we have in this flight

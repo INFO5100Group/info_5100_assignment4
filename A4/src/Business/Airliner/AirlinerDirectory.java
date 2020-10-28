@@ -14,5 +14,7 @@ public class AirlinerDirectory extends ArrayList<Airliner> {
     private static final long serialVersionUID = 1L;
 
     //TODO: add, remove, search, update airliners.
-    
+    public void deletAirliner(Airliner airliner){
+       Airliner.remove(airliner);
+   }
 }

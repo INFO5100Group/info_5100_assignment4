@@ -10,19 +10,24 @@ import Business.Travel.MasterTravelSchedule;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Administrator
  */
 public class CreateNewFlightsJPanel extends javax.swing.JPanel {
-    private MasterTravelSchedule masterTravelSchedule;   
+    private MasterTravelSchedule masterTravelSchedule;
+    private JPanel UserProcessContainer;
     /**
      * Creates new form CreateNewAirlinerJPanel
      */
-    public CreateNewFlightsJPanel(MasterTravelSchedule mt) {
+    public CreateNewFlightsJPanel(JPanel UserProcessContainer,MasterTravelSchedule mt) {
         this.masterTravelSchedule = mt;
+        this.UserProcessContainer = UserProcessContainer;
         initComponents();
     }
 
@@ -45,7 +50,6 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ComboTime = new javax.swing.JComboBox<>();
         btnCreate = new javax.swing.JButton();
-        btnCreate1 = new javax.swing.JButton();
         jtxName = new javax.swing.JTextField();
         jtxDate = new javax.swing.JTextField();
 
@@ -69,14 +73,12 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
 
         ComboTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnCreate.setText("View");
+        btnCreate.setText("Create");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateActionPerformed(evt);
             }
         });
-
-        btnCreate1.setText("Create");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -115,11 +117,6 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
                         .addGap(115, 115, 115)
                         .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(126, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(717, Short.MAX_VALUE)
-                    .addComponent(btnCreate1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(120, 120, 120)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,11 +149,6 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboTime, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(156, 156, 156)
-                    .addComponent(btnCreate1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(340, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -164,10 +156,6 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = jtxDate.getText();
-        try {
-            Date dates = simpleDateFormat.parse(date);
-        } catch (ParseException ex) {
-        }
         String name = jtxName.getText();
         String[] adress = { "Boston", "New York", "San Francisco","Washington D.C", "Seattle", "Austin" };
         String[] time = { "Morning", "Daytime", "Evening"};
@@ -177,14 +165,20 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
         String arr = ComboAr.getSelectedItem().toString();
         String dep = ComboDe.getSelectedItem().toString();
         String times = ComboTime.getSelectedItem().toString();
-        /* This part is add
-        Flight flight = masterTravelSchedule.getFlightSchedule().addFlight(f);
+        Flight flight = new Flight();
         flight.setFlightName(name);
         flight.setDestination(arr);
-        flight.setDeparturelocation(dep);
-        flight.setDepartTime(dates);
-        */
-        
+        flight.setDaytime(times);
+        flight.setDeparture(dep);
+        try {
+            Date dates = simpleDateFormat.parse(date);
+            flight.setDepartTime(dates);
+        } catch (ParseException ex) {
+        }     
+        try {
+            masterTravelSchedule.getFlightSchedule().addFlight(flight);
+        } catch (Exception ex) {
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
 
 
@@ -193,7 +187,6 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ComboDe;
     private javax.swing.JComboBox<String> ComboTime;
     private javax.swing.JButton btnCreate;
-    private javax.swing.JButton btnCreate1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
