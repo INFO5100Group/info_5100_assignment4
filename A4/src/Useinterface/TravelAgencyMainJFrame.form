@@ -27,6 +27,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="btnAirliners" min="-2" pref="165" max="-2" attributes="0"/>
                   <Component id="btnCustomer" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="btnFlight" min="-2" pref="165" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jSplitPane1" max="32767" attributes="0"/>
@@ -42,6 +43,8 @@
               <Component id="btnAirliners" min="-2" pref="59" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
               <Component id="btnCustomer" min="-2" pref="59" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <Component id="btnFlight" min="-2" pref="59" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -96,13 +99,27 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnAirliners">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ManageAirliners"/>
+        <Property name="text" type="java.lang.String" value="CreateAirliners"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAirlinersActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCustomer">
       <Properties>
         <Property name="text" type="java.lang.String" value="CreateCustomer"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCustomerActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnFlight">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="CreateFlight"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFlightActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

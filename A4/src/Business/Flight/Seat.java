@@ -12,6 +12,9 @@ public class Seat {
 
     private int SeatNum;
     private boolean isTaken;
+    private int rowNum;
+    private int columnNum;
+    private String Location;
 
 
     public Seat() {
@@ -53,6 +56,31 @@ public class Seat {
     public void setIsTaken(boolean isTaken) {
         this.isTaken = isTaken;
     }
+
+    public int getRowNum() {
+        return rowNum;
+    }
+
+    public void setRowNum(int rowNum) {
+        this.rowNum = rowNum;
+    }
+
+    public int getColumnNum() {
+        return columnNum;
+    }
+
+    public void setColumnNum(int columnNum) {
+        this.columnNum = columnNum;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String Location) {
+        this.Location = Location;
+    }
+
 
     @Override
     public String toString() {

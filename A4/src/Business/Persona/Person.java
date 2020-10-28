@@ -11,6 +11,7 @@ public class Person {
     private int ID;
     private String fName;
     private String lName;
+    private String gender;
 
     /**
      * Constructor with person's name
@@ -22,13 +23,15 @@ public class Person {
 
     /**
      * Contructor with person's name
+     * add gender
      * @param fname
      * @param lname
      */
-    public Person(String fname, String lname){
+    public Person(String fname, String lname,String gender){
         this();
         this.setFName(fname);
         this.setLName(lname);
+        this.setGender(gender);
     }
 
     public int getID() {
@@ -49,6 +52,14 @@ public class Person {
 
     public void setLName(String lName) {
         this.lName = lName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     @Override

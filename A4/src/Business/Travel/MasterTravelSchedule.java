@@ -5,10 +5,27 @@
  */
 package Business.Travel;
 
+import Business.Flight.FlightSchedule;
+
+
 /**
  *
  * @author Administrator
  */
 public class MasterTravelSchedule {
+    FlightSchedule flightSchedule;
+    
+    public MasterTravelSchedule(){
+        flightSchedule = new FlightSchedule();
+    }
+
+    public FlightSchedule getFlightSchedule() {
+        return flightSchedule;
+    }
+
+    public void setFlightSchedule(FlightSchedule flightSchedule) {
+        this.flightSchedule = flightSchedule;
+    }
+ 
     
 }

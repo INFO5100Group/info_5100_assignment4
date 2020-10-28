@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -22,39 +22,27 @@
               <EmptySpace min="-2" pref="248" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox1" min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" alignment="0" min="-2" pref="648" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox3" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="jComboBox4" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="239" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBox2" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                          <Component id="jComboBox5" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="88" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnModify" min="-2" pref="125" max="-2" attributes="0"/>
-                          <Component id="btnUpdate" min="-2" pref="125" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel3" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
+                  <Component id="btnSave" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="864" max="32767" attributes="0"/>
-                  <Component id="btnView" min="-2" pref="125" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace pref="178" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jtxAdress" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                          <Component id="jtxName" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="344" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnUpdate" min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnBack" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                  </Group>
               </Group>
           </Group>
       </Group>
@@ -64,39 +52,23 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="133" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox3" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox4" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                          <Component id="jComboBox5" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" pref="46" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Component id="btnModify" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                      <Component id="btnUpdate" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtxName" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
               </Group>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
-                  <Component id="btnView" min="-2" pref="69" max="-2" attributes="0"/>
-                  <EmptySpace pref="393" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel3" alignment="3" min="-2" pref="46" max="-2" attributes="0"/>
+                  <Component id="jtxAdress" alignment="3" min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnSave" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  <Component id="btnUpdate" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="btnBack" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="117" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -111,120 +83,50 @@
         <Property name="text" type="java.lang.String" value="View Airliners"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="ViewTable">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="5" rowCount="0">
-                <Column editable="false" title="Title 1" type="java.lang.Object"/>
-                <Column editable="false" title="Title 2" type="java.lang.Object"/>
-                <Column editable="false" title="Title 3" type="java.lang.Object"/>
-                <Column editable="false" title="null" type="java.lang.Object"/>
-                <Column editable="false" title="null" type="java.lang.Object"/>
-              </Table>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
-    <Component class="javax.swing.JComboBox" name="jComboBox3">
+    <Component class="javax.swing.JTextField" name="jtxName">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox4">
+    <Component class="javax.swing.JTextField" name="jtxAdress">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
+        <Property name="text" type="java.lang.String" value=" "/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox5">
+    <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Airliner Name"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Airliner Adress"/>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnUpdate">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnView">
+    <Component class="javax.swing.JButton" name="btnSave">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaveActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnModify">
+    <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Modify"/>
+        <Property name="text" type="java.lang.String" value="&lt;Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

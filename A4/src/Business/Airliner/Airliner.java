@@ -11,10 +11,10 @@ public class Airliner {
 
     private int ID;
     private String linerName;
-
+    
     private FlightSchedule schedule;
     private Fleet fleet;
-
+    private String adress;
 
     /**getter and setter */
     public Airliner() {
@@ -57,6 +57,14 @@ public class Airliner {
 
     public void setLinerName(String linerName) {
         this.linerName = linerName;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     
