@@ -15,6 +15,6 @@ public class AirlinerDirectory extends ArrayList<Airliner> {
 
     //TODO: add, remove, search, update airliners.
     public void deletAirliner(Airliner airliner){
-       this.remove(airliner);
-   }
+        this.remove(airliner);
+    }
 }
