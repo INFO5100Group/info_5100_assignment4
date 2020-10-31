@@ -9,12 +9,14 @@ import Business.Flight.Flight;
 import Business.Flight.FlightSchedule;
 import Business.Flight.Seat;
 import Business.Flight.Ticket;
+import Business.Flight.TicketDirectory;
 import Business.Persona.Customer;
 import Business.Persona.CustomerDirectory;
 import Business.Travel.MasterTravelSchedule;
 import Business.Travel.TravelOffice;
 import Useinterface.Flight.ViewFlightsJPanel;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -24,42 +26,47 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrator
  */
 public class CustomerScheduleJPanel extends javax.swing.JPanel {
-    private Ticket ticket;
     private JPanel UserProcessContainer;
     private CustomerDirectory cusd;
+    private TicketDirectory tickd;
+    private Customer cust;
     /**
      * Creates new form Schedule
      */
-    public CustomerScheduleJPanel(JPanel UserProcessContainer,Ticket ticket, CustomerDirectory cusd) {
-        this.ticket = ticket;
+    public CustomerScheduleJPanel(JPanel UserProcessContainer,Customer c, TravelOffice of) {
+        this.cust = c;
         this.UserProcessContainer = UserProcessContainer;
-        this.cusd = cusd;
-        Customer customer = new Customer();
+        this.cusd = of.getCustomerDirecotry();
+        this.tickd = of.getTicketDirectory();
         initComponents();
-        populateCombo();
-        CustomeridCombo.addItem(String.valueOf(customer.getID()));
-    }
-    public void populateCombo(){
-        CustomeridCombo.removeAllItems();
-        for(Customer c: cusd.getCustomerlist()){
-            CustomeridCombo.addItem(c);
-        }
+        populateCustomer();
         populateTable();
     }
+    
+    public void populateCustomer(){
+        custInfo.setText(cust + " ID:" + cust.getID());
+    }
+    
+    
+    /**
+     * this one display content of the table
+     */
     public void populateTable(){
         DefaultTableModel model = (DefaultTableModel)CustomerTable.getModel();
         model.setRowCount(0);
-        Customer customer = (Customer)CustomeridCombo.getSelectedItem();
-        for(Ticket t : customer.getTicketlist()) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        
+        for(Ticket t : tickd.getTicketsByCustomer(cust)) {
             Object row[] = new Object[8];
             row[0] = t.getID();
-            row[1] = t.getDeparture(); 
-            row[2] = t.getDestination();
-            row[3] = t.getDaytime();
-            row[4] = t.getSeatRow(); 
-            row[5] = t.getSeatColumn();
-            row[6] = t.getSeatLocation;// for example, First column or second column
-            row[7] = t.getDate();
+            row[1] = t.getTicketFlight().getFlightName();       
+            row[2] = t.getTicketSeat().getRowNum(); 
+            row[3] = t.getTicketSeat().getColumnNum();
+            row[4] = t.getTicketFlight().getDeparture();
+            row[5] = t.getTicketFlight().getDestination();
+            row[6] = dateFormat.format(t.getTicketFlight().getDepartTime());
+            row[7] = timeFormat.format(t.getTicketFlight().getDepartTime());
             model.addRow(row);
         }
     }
@@ -77,8 +84,8 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         btnTicket = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         CustomerTable = new javax.swing.JTable();
-        CustomeridCombo = new javax.swing.JComboBox<>();
         btnBack = new javax.swing.JButton();
+        custInfo = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -91,7 +98,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnTicket.setText("CreateCustomerTiket");
+        btnTicket.setText("Create Ticket");
         btnTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTicketActionPerformed(evt);
@@ -103,7 +110,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Departure", "Arrival", "Time of Day", "Row", "Column", "Seat Location", "Date"
+                "ID", "Flight", "Seat Row", "Seat Column", "Departure", "Arrival", "Date", "Time"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -116,8 +123,6 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(CustomerTable);
 
-        CustomeridCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,50 +130,52 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
             }
         });
 
+        custInfo.setText("Customer Info");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(CustomeridCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(65, 65, 65)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(248, 248, 248))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(custInfo))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 96, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(257, 257, 257)
-                                .addComponent(btnTicket)
-                                .addGap(198, 198, 198))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(406, 406, 406)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(CustomeridCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addComponent(custInfo)
+                .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addGap(139, 139, 139)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106))
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -189,7 +196,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
             if(dialogResult == JOptionPane.YES_OPTION){
                 Ticket ticket = (Ticket) CustomerTable.getValueAt(selectedRow, 0);
                 Customer customer = new Customer();
-                customer.deleteTicket(ticket);
+                //customer.deleteTicket(ticket);
                 populateTable();
             }
         }
@@ -205,11 +212,10 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CustomerTable;
-    private javax.swing.JComboBox<String> CustomeridCombo;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBack2;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnTicket;
+    private javax.swing.JLabel custInfo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

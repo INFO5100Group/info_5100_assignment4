@@ -16,4 +16,8 @@ public class Customer extends Person{
         super(fname, lname, gender);
     }
 
+    @Override
+    public String toString() {
+        return this.getFName() + " " + this.getLName();
+    }
 }

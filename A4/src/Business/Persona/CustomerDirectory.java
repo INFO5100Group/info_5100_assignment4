@@ -29,7 +29,7 @@ public class CustomerDirectory extends ArrayList<Customer> {
     /**
      * add a new customer to directory
      * @param firstName first name 
-     * @param lastName last nema
+     * @param lastName last name
      * @return the customer added to directory
      */
     public Customer addCustomer(String firstName, String lastName,String gender){
@@ -83,5 +83,4 @@ public class CustomerDirectory extends ArrayList<Customer> {
         .collect(Collectors
         .toCollection(CustomerDirectory::new)); 
     }
-    
 }

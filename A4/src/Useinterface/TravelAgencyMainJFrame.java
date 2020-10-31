@@ -5,18 +5,16 @@
  */
 package Useinterface;
 
-import Business.Airliner.AirlinerDirectory;
-import Business.Flight.FlightSchedule;
-import Business.Persona.CustomerDirectory;
-import Business.Travel.MasterTravelSchedule;
-import Business.Travel.TravelAgency;
-import Business.Travel.TravelOffice;
-import Useinterface.CustomerAction.CreateCustomerJPanel;
-import Useinterface.Flight.CreateNewFlightsJPanel;
-import Useinterface.ManageAirliners.CreateNewAirlinerJPanel;
-import Useinterface.ManageAirliners.ManageAirlinersJPanel;
+import Business.Airliner.*;
+import Business.Flight.*;
+import Business.Persona.*;
+import Business.Travel.*;
+import Useinterface.CustomerAction.*;
+import Useinterface.Flight.*;
+import Useinterface.ManageAirliners.*;
+import Test.*;
+
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 
 /**
  *
@@ -26,16 +24,22 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     TravelAgency travelAgency;
     TravelOffice travelOffice;
     MasterTravelSchedule masterTravelschedule;
-    private JPanel UserProcessContainer;
     /**
      * Creates new form TravelAgencyMainJFram
      */
-    public TravelAgencyMainJFrame(JPanel UserProcessContainer, TravelOffice tf, TravelAgency ta,MasterTravelSchedule mt) {
-        this.travelAgency = ta;
-        this.travelOffice = tf;
-        this.masterTravelschedule = mt;
-        this.UserProcessContainer = UserProcessContainer;
+    public TravelAgencyMainJFrame() {
+        this.travelAgency = new TravelAgency();
+        this.travelOffice = new TravelOffice();
+        this.masterTravelschedule = new MasterTravelSchedule();
         initComponents();
+        initData();
+        
+        setSize(1000, 800);
+    }
+    
+    private void initData(){
+        this.travelOffice.setCustomerDirecotry(InitEverything.createCustomers());
+        this.travelOffice.setTicketDirectory(InitEverything.createTickets(travelOffice.getCustomerDirecotry()));
     }
 
     /**
@@ -49,50 +53,19 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
         btnAirliners = new javax.swing.JButton();
-        btnCustomer = new javax.swing.JButton();
         btnFlight = new javax.swing.JButton();
+        btnCustomer = new javax.swing.JButton();
+        UserProcessContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 796, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setRightComponent(jPanel1);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
-        );
-
-        jSplitPane1.setLeftComponent(jPanel2);
+        jSplitPane1.setDividerLocation(200);
 
         btnAirliners.setText("CreateAirliners");
         btnAirliners.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAirlinersActionPerformed(evt);
-            }
-        });
-
-        btnCustomer.setText("CreateCustomer");
-        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCustomerActionPerformed(evt);
             }
         });
 
@@ -103,49 +76,60 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
             }
         });
 
+        btnCustomer.setText("Customer");
+        btnCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCustomerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61)
+                .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jSplitPane1.setLeftComponent(jPanel1);
+
+        UserProcessContainer.setLayout(new java.awt.CardLayout());
+        jSplitPane1.setRightComponent(UserProcessContainer);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSplitPane1)
-                .addContainerGap())
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addComponent(btnAirliners, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addComponent(btnFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
-        // TODO add your handling code here:
-        AirlinerDirectory ad = travelAgency.getAirlinerDirectory();
-        CreateNewAirlinerJPanel cna = new CreateNewAirlinerJPanel(UserProcessContainer,travelAgency);
-        UserProcessContainer.add("CreateNewAirlinerJPanel",cna);
-        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
-        layout.next(UserProcessContainer);
-    }//GEN-LAST:event_btnAirlinersActionPerformed
-
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
-        // TODO add your handling code here:
         CustomerDirectory cd = travelOffice.getCustomerDirecotry();
-        CreateCustomerJPanel ccp = new CreateCustomerJPanel(UserProcessContainer,travelOffice);
-        UserProcessContainer.add("customercreajpanel",ccp);
+        CustomerViewJPanel ccp = new CustomerViewJPanel(UserProcessContainer,travelOffice);
+        UserProcessContainer.add("customersview",ccp);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
         layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnCustomerActionPerformed
@@ -159,64 +143,19 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
         layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnFlightActionPerformed
 
+    private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
+        // TODO add your handling code here:
+        AirlinerDirectory ad = travelAgency.getAirlinerDirectory();
+        CreateNewAirlinerJPanel cna = new CreateNewAirlinerJPanel(UserProcessContainer,travelAgency);
+        UserProcessContainer.add("CreateNewAirlinerJPanel",cna);
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.next(UserProcessContainer);
+    }//GEN-LAST:event_btnAirlinersActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TravelAgencyMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TravelAgencyMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TravelAgencyMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TravelAgencyMainJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -226,11 +165,11 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel UserProcessContainer;
     private javax.swing.JButton btnAirliners;
     private javax.swing.JButton btnCustomer;
     private javax.swing.JButton btnFlight;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSplitPane jSplitPane1;
     // End of variables declaration//GEN-END:variables
 }

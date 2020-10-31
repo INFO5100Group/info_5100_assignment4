@@ -5,17 +5,20 @@
  */
 package Business.Travel;
 
-import Business.Persona.CustomerDirectory;
+import Business.Persona.*;
+import Business.Flight.*;
 
 /**
  *
- * @author Administrator
+ * @author Administrator / Bohan Feng
  */
 public class TravelOffice {
     CustomerDirectory customerDirecotry;
+    TicketDirectory ticketDirectory;
     
     public TravelOffice(){
         customerDirecotry = new CustomerDirectory();
+        ticketDirectory = new TicketDirectory();
     }
 
     public CustomerDirectory getCustomerDirecotry() {
@@ -25,5 +28,13 @@ public class TravelOffice {
     public void setCustomerDirecotry(CustomerDirectory customerDirecotry) {
         this.customerDirecotry = customerDirecotry;
     }
-    
+
+    public TicketDirectory getTicketDirectory() {
+        return this.ticketDirectory;
+    }
+
+    public void setTicketDirectory(TicketDirectory ticketDirectory) {
+        this.ticketDirectory = ticketDirectory;
+    }
+ 
 }
