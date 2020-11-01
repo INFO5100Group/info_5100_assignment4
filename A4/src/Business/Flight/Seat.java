@@ -28,10 +28,11 @@ public class Seat {
         this.SeatNum = num;
     }
 
-    public Seat(int row, int col){
+    public Seat(int row, int col, String lo){
         this();
         this.columnNum = col;
         this.rowNum = row;
+        this.Location = lo;
     }
 
     /**getter and setters */

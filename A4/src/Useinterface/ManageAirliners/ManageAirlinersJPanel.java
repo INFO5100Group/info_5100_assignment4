@@ -186,10 +186,10 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
         if(selectedRow >= 0){
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete the Airliner?", "Warning", dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                Airliner airliner = (Airliner) ViewTable.getValueAt(selectedRow, 0);
-                AirlinerDirectory airlinerDirectory = new AirlinerDirectory();
-                airlinerDirectory.deletAirliner(airliner);
+            if(dialogResult == JOptionPane.YES_OPTION){ 
+                int airId = (int)(ViewTable.getValueAt(selectedRow, 0));
+               Airliner airliner = this.travelAgency.getAirlinerDirectory().getAirlinerByID(airId);
+              travelAgency.getAirlinerDirectory().remove(airliner);
                 populateTable();
             }
         }

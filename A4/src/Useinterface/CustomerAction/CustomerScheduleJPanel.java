@@ -59,7 +59,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");  
         for(Ticket t : tickd.getTicketsByCustomer(cust)) {
-            Object row[] = new Object[8];
+            Object row[] = new Object[9];
             row[0] = t.getID();
             row[1] = t.getTicketFlight().getFlightName();       
             row[2] = t.getTicketSeat().getRowNum(); 
@@ -68,6 +68,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
             row[5] = t.getTicketFlight().getDestination();
             row[6] = dateFormat.format(t.getTicketFlight().getDepartTime());
             row[7] = timeFormat.format(t.getTicketFlight().getDepartTime());
+            row[8] = t.getTicketSeat().getLocation();
             model.addRow(row);
         }
     }
@@ -112,11 +113,11 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Flight", "Seat Row", "Seat Column", "Departure", "Arrival", "Date", "Time"
+                "ID", "Flight", "Seat Row", "Seat Column", "Departure", "Arrival", "Date", "Time", "SeatLocation"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

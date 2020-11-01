@@ -130,6 +130,12 @@ public class InitEverything {
             "fg-03",
             "pp-04"
         };
+        String seatLocation[] = new String[]
+        {
+            "window",
+            "middle",
+            "Aisle"
+        };
         int custCount = 0;
         
         for(int i = 0; i < 2; i++){
@@ -138,6 +144,7 @@ public class InitEverything {
             Seat s = new Seat(custCount);
             s.setRowNum(custCount/4);
             s.setColumnNum(custCount%4);
+            s.setLocation(seatLocation[custCount % 3]);
             Flight f = new Flight(flightNames[custCount % 4]);
             f.setDeparture(placeNames[custCount % 5]);
             f.setDestination(placeNames[4 - (custCount % 5)]);

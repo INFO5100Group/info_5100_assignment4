@@ -8,10 +8,12 @@ package Useinterface.Flight;
 import Business.Airliner.Airliner;
 import Business.Flight.Flight;
 import Business.Flight.FlightSchedule;
+import Business.Persona.Customer;
 import Business.Travel.*;
 import Useinterface.CustomerAction.CreateCustomerJPanel;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -77,7 +79,6 @@ public class ListviewFlight extends javax.swing.JPanel {
         tblFlight = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnViewDetail = new javax.swing.JButton();
         headerLabel = new javax.swing.JLabel();
 
         tblFlight.setModel(new javax.swing.table.DefaultTableModel(
@@ -112,13 +113,6 @@ public class ListviewFlight extends javax.swing.JPanel {
             }
         });
 
-        btnViewDetail.setText("View Detail");
-        btnViewDetail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewDetailActionPerformed(evt);
-            }
-        });
-
         headerLabel.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
         headerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         headerLabel.setText("View Flights");
@@ -135,10 +129,8 @@ public class ListviewFlight extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(232, 232, 232)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(119, 119, 119)
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -153,16 +145,11 @@ public class ListviewFlight extends javax.swing.JPanel {
                 .addComponent(headerLabel)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnViewDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,17 +162,23 @@ public class ListviewFlight extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblFlight.getSelectedRow();
+        if(selectedRow >= 0){
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete the Flight?", "Warning", dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){ 
+               int flightId = (int)(tblFlight.getValueAt(selectedRow, 0));
+               Flight flight = this.flightSch.getFlightByID(flightId);
+              flightSch.remove(flight);
+               populateTable();
+            }
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnViewDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnViewDetailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnViewDetail;
     private javax.swing.JLabel headerLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblFlight;

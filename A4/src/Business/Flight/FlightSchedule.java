@@ -140,6 +140,14 @@ public class FlightSchedule extends ArrayList<Flight>{
         .collect(Collectors
         .toCollection(FlightSchedule::new));
     }
+        public Flight getFlightByID(int ID){
+        try{
+            return (Flight)this.stream()
+                    .filter(f -> f.getID() == ID)
+                    .toArray()[0];
+        }catch(java.lang.ArrayIndexOutOfBoundsException e){}
+        return null;
+    }
  
     /**
      * search a list of flight that depart at specific day
@@ -157,5 +165,8 @@ public class FlightSchedule extends ArrayList<Flight>{
                 .truncatedTo(ChronoUnit.DAYS)))
         .collect(Collectors
         .toCollection(FlightSchedule::new));
+    }
+    public void removef(Flight f){
+        this.remove(f);
     }
 }

@@ -107,6 +107,11 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
             CoDate.addItem(dateFormat.format(date));
         }
         
+        CoSeatLo.removeAllItems();
+            CoSeatLo.addItem("window");
+            CoSeatLo.addItem("middle");
+            CoSeatLo.addItem("Aisle");
+        
     }
     
     public void populateTable(){
@@ -152,6 +157,8 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
         btnBack2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFlight = new javax.swing.JTable();
+        CoSeatLo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -213,6 +220,10 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblFlight);
 
+        CoSeatLo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setText("Seat Location");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,7 +242,11 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                .addComponent(CoSeatLo, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(139, 139, 139)
                                 .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,7 +308,10 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(CoSeatLo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -308,7 +326,8 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
             if(dialogResult == JOptionPane.YES_OPTION){ 
                 int row = Integer.parseInt(String.valueOf(this.CoRow.getSelectedItem()));
                 int col = Integer.parseInt(String.valueOf(this.CoColumn.getSelectedItem()));
-                Seat newSeat = new Seat(row, col);
+                String lo = String.valueOf(this.CoSeatLo.getSelectedItem());
+                Seat newSeat = new Seat(row, col, lo);
                 Ticket newt = new Ticket(this.cust, newSeat, selectedFlight);
                 this.masterSch.getTravelOffice().getTicketDirectory().add(newt);
                 populateTable();
@@ -331,12 +350,14 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> CoDaytime;
     private javax.swing.JComboBox<String> CoDep;
     private javax.swing.JComboBox<String> CoRow;
+    private javax.swing.JComboBox<String> CoSeatLo;
     private javax.swing.JButton btnBack2;
     private javax.swing.JButton btnBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
