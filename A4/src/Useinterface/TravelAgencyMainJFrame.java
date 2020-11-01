@@ -40,6 +40,12 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     private void initData(){
         this.masterTravelschedule.getTravelOffice().setCustomerDirecotry(InitEverything.createCustomers());
         this.masterTravelschedule.getTravelOffice().setTicketDirectory(InitEverything.createTickets(this.masterTravelschedule.getTravelOffice().getCustomerDirecotry()));
+        this.travelAgency.setAirlinerDirectory(InitEverything.createAirliners()); // create airliners
+        for(Airliner liner : this.travelAgency.getAirlinerDirectory()){ // load all flights into a master list
+            for(Flight f : liner.getSchedule()){
+                this.masterTravelschedule.getFlightSchedule().add(f);
+            }
+        }
     }
 
     /**

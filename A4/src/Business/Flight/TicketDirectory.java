@@ -28,6 +28,7 @@ public class TicketDirectory extends ArrayList<Ticket> {
     public void setID(int ID) {
         this.ID = ID;
     }
+    
 
     /**
      * get ticket by customer
@@ -40,5 +41,10 @@ public class TicketDirectory extends ArrayList<Ticket> {
         .collect(Collectors
         .toCollection(TicketDirectory::new));
     }
-
+    
+    public Ticket getTicketByID(int ID){
+        return (Ticket)this.stream()
+                .filter(t -> t.getID() == ID)
+                .toArray()[0];
+    }
 }

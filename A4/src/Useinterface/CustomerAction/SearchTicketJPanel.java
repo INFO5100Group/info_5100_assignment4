@@ -13,6 +13,10 @@ import Business.Persona.Customer;
 import Business.Travel.MasterTravelSchedule;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,7 +34,7 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
      */
     public SearchTicketJPanel(JPanel UserProcessContainer,Customer c, MasterTravelSchedule ms) {
         initComponents();
-        
+        this.cust = c;
         this.UserProcessContainer = UserProcessContainer;
         this.masterSch = ms;
         this.flightSch = ms.getFlightSchedule();
@@ -39,6 +43,10 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
     }
     
     public void populateComboo(){
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");  
+        
         // combooBox seatCol
         CoColumn.removeAllItems();;
         for(int i = 1; i < 51; i++){
@@ -50,6 +58,55 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
         for(int i = 1; i < 7; i++){
             CoRow.addItem(i + "");
         }
+        
+        // CoDep
+        CoDep.removeAllItems();
+        for(String dep : this.masterSch
+                .getFlightSchedule()
+                .stream()
+                .map(Flight::getDeparture)
+                .distinct()
+                .collect(Collectors
+                .toCollection(ArrayList<String>::new))){
+            CoDep.addItem(dep);
+        }
+        
+        // CoArr
+        CoArr.removeAllItems();
+        for(String dep : this.masterSch
+                .getFlightSchedule()
+                .stream()
+                .map(Flight::getDestination)
+                .distinct()
+                .collect(Collectors
+                .toCollection(ArrayList<String>::new))){
+            CoArr.addItem(dep);
+        }
+        
+        //CoDaytime
+        CoDaytime.removeAllItems();
+        for(Date time : this.masterSch
+                .getFlightSchedule()
+                .stream()
+                .map(Flight::getDepartTime)
+                .distinct()
+                .collect(Collectors
+                .toCollection(ArrayList<Date>::new))){
+            CoDaytime.addItem(timeFormat.format(time));
+        }
+        
+        //CoDate
+        CoDate.removeAllItems();
+        for(Date date : this.masterSch
+                .getFlightSchedule()
+                .stream()
+                .map(Flight::getDepartTime)
+                .distinct()
+                .collect(Collectors
+                .toCollection(ArrayList<Date>::new))){
+            CoDate.addItem(dateFormat.format(date));
+        }
+        
     }
     
     public void populateTable(){
@@ -57,7 +114,7 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-        for(Flight f: flightSch) {
+        for(Flight f:  this.masterSch.getFlightSchedule()) {
             Object row[] = new Object[6];
             row[0] = f.getID();
             row[1] = f.getFlightName();
@@ -65,6 +122,7 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
             row[3] = f.getDestination();
             row[4] = dateFormat.format(f.getDepartTime());
             row[5] = timeFormat.format(f.getDepartTime());
+            model.addRow(row);
         }
     }
 
@@ -110,7 +168,7 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Prefer time");
+        jLabel7.setText("Time");
 
         CoDaytime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -219,12 +277,13 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
                         .addComponent(CoArr, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CoColumn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CoDaytime, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CoRow, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CoDaytime, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,14 +299,21 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookActionPerformed
-        // TODO add your handling code here:
-        CoArr.getSelectedItem();
-        CoColumn.getSelectedItem();
-        CoDaytime.getSelectedItem();
-        CoDep.getSelectedItem();
-        CoRow.getSelectedItem();
-        SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd " ); 
-        CoDate.getSelectedItem();
+        int selectedRow = tblFlight.getSelectedRow();
+        int FlightID = (int)tblFlight.getValueAt(selectedRow, 0);
+        Flight selectedFlight = flightSch.searchByID(FlightID);
+        if(selectedRow >= 0){
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "would you like to Book the flight " + selectedFlight.getFlightName() + " For " + this.cust + "?", "Warning", dialogButton);
+            if(dialogResult == JOptionPane.YES_OPTION){ 
+                int row = Integer.parseInt(String.valueOf(this.CoRow.getSelectedItem()));
+                int col = Integer.parseInt(String.valueOf(this.CoColumn.getSelectedItem()));
+                Seat newSeat = new Seat(row, col);
+                Ticket newt = new Ticket(this.cust, newSeat, selectedFlight);
+                this.masterSch.getTravelOffice().getTicketDirectory().add(newt);
+                populateTable();
+            }
+        }
     }//GEN-LAST:event_btnBookActionPerformed
 
     private void btnBack2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack2ActionPerformed

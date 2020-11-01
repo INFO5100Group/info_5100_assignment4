@@ -6,11 +6,13 @@
 package Test;
 
 import Business.Flight.Flight;
+import Business.Flight.FlightSchedule;
 import Business.Flight.Seat;
 import Business.Flight.Ticket;
 import Business.Flight.TicketDirectory;
 import Business.Persona.Customer;
 import Business.Persona.CustomerDirectory;
+import Business.Airliner.*;
 import java.util.Date;
 
 /**
@@ -53,6 +55,60 @@ public class InitEverything {
             }
         }
         
+        return re;
+    }
+    
+    public static Fleet createAirplanes(){
+        Fleet re = new Fleet();
+        
+        for(int i = 0; i < 10; i++){
+            Airplane newPlane = new Airplane("airmodel" + (99 - i), "airMaunfacture" + i);
+            newPlane.setSeatNum(20 * i);
+            re.add(newPlane);
+        }
+        return re;
+    }
+    
+    public static FlightSchedule createFlightScheduleForLiner(String lname){
+        FlightSchedule re = new FlightSchedule();
+        
+        String placeNames[] = new String[]
+        {
+            "Mars",
+            "Jupiter",
+            "Saturn",
+            "Neptune",
+            "Mercury",
+            "Venus",
+            "Uranus",
+            "Earth"
+        };
+        
+        for(int i = 0; i < 10; i++){
+            Flight f = new Flight(lname + "00" + i);
+            f.setDestination(placeNames[(int)(Math.random() * 10) % 8]);
+            f.setDeparture(placeNames[(int)(Math.random() * 10)% 8]);
+            f.setDepartTime(randDate());
+            re.add(f);
+        }
+        return re;
+    }
+        
+    public static AirlinerDirectory createAirliners(){
+        AirlinerDirectory re = new AirlinerDirectory();
+        String lnames[] = new String[]{
+          "BIG",  
+          "SML",  
+          "XXX",  
+          "YUZ",  
+          "ASD",  
+          "FGH",  
+        };
+        for(int i = 0; i < 6; i ++){
+            Airliner newLiner = new Airliner(createFlightScheduleForLiner(lnames[i]),createAirplanes());
+            newLiner.setLinerName(lnames[i] + " Airline");
+            re.add(newLiner);
+        }
         return re;
     }
     
@@ -101,5 +157,6 @@ public class InitEverything {
         int min = (int)(Math.random() * 59 + 1);
         return new Date(year, month, day, hour, min);
     }
+    
     
 }

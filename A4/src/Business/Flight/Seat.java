@@ -28,6 +28,12 @@ public class Seat {
         this.SeatNum = num;
     }
 
+    public Seat(int row, int col){
+        this();
+        this.columnNum = col;
+        this.rowNum = row;
+    }
+
     /**getter and setters */
     public int getID() {
         return this.ID;

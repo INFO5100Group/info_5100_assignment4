@@ -54,7 +54,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
      * this one display content of the table
      */
     public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)CustomerTable.getModel();
+        DefaultTableModel model = (DefaultTableModel)ticketTable.getModel();
         model.setRowCount(0);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");  
@@ -84,9 +84,10 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnTicket = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        CustomerTable = new javax.swing.JTable();
+        ticketTable = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
         custInfo = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -106,7 +107,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
             }
         });
 
-        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
+        ticketTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -122,7 +123,7 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(CustomerTable);
+        jScrollPane1.setViewportView(ticketTable);
 
         btnBack.setText("<Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +133,13 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         });
 
         custInfo.setText("Customer Info");
+
+        jButton1.setText("Refresh");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -160,6 +168,10 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
                                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,7 +186,9 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(139, 139, 139)
+                .addGap(26, 26, 26)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
         );
@@ -189,14 +203,14 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        int selectedRow = CustomerTable.getSelectedRow();
+        int selectedRow = ticketTable.getSelectedRow();
         if(selectedRow >= 0){
             int dialogButton = JOptionPane.YES_NO_OPTION;
             int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete the Ticket?", "Warning", dialogButton);
-            if(dialogResult == JOptionPane.YES_OPTION){
-                Ticket ticket = (Ticket) CustomerTable.getValueAt(selectedRow, 0);
-                Customer customer = new Customer();
-                //customer.deleteTicket(ticket);
+            if(dialogResult == JOptionPane.YES_OPTION){ 
+                int ticketID = (int)(ticketTable.getValueAt(selectedRow, 0));
+                Ticket ticket = this.tickd.getTicketByID(ticketID);
+                tickd.remove(ticket);
                 populateTable();
             }
         }
@@ -209,14 +223,19 @@ public class CustomerScheduleJPanel extends javax.swing.JPanel {
         layout.previous(UserProcessContainer);
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        populateTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable CustomerTable;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnTicket;
     private javax.swing.JLabel custInfo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable ticketTable;
     // End of variables declaration//GEN-END:variables
 }
