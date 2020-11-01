@@ -53,9 +53,6 @@ public class FlightSchedule extends ArrayList<Flight>{
         else if(f.getDeparture() == null){
             throw new Exception("Departure cannot be null before adding to schedule");
         }
-        if(f.getPlane() == null){
-            throw new Exception("plane cannot be null before adding to schedule");
-        }
         else{
             this.add(f);
         }

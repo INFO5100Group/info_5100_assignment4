@@ -23,6 +23,7 @@ public class Airliner {
     }
 
     public Airliner(FlightSchedule s, Fleet f){
+        this();
         this.schedule = s;
         this.fleet = f;
     }

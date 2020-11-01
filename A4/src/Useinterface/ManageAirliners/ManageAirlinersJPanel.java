@@ -9,6 +9,7 @@ import Business.Airliner.Airliner;
 import Business.Airliner.AirlinerDirectory;
 import Business.Flight.Flight;
 import Business.Travel.TravelAgency;
+import Useinterface.Flight.ListviewFlight;
 import Useinterface.Flight.ViewFlightsJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -129,23 +130,27 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(231, 231, 231)
-                                    .addComponent(btnFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                            .addComponent(jScrollPane2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnFlights, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(59, 59, 59)
+                                .addComponent(btnAirliner, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(161, 161, 161)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +198,8 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
     private void btnAirlinerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinerActionPerformed
         // TODO add your handling code here:
         int selectedRow = ViewTable.getSelectedRow();
-        Airliner airliner = (Airliner) ViewTable.getValueAt(selectedRow, 0);
+        int airID = (int) ViewTable.getValueAt(selectedRow, 0);
+        Airliner airliner = this.travelAgency.getAirlinerDirectory().getAirlinerByID(airID);
         ViewAirlinerJPanel panel = new ViewAirlinerJPanel(UserProcessContainer,airliner);
         UserProcessContainer.add("ViewAirlinerJPanel",panel);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
@@ -207,11 +213,13 @@ public class ManageAirlinersJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row from table","Warning",JOptionPane.WARNING_MESSAGE);
         }
         else{
-             Flight flight = (Flight) ViewTable.getValueAt(selectedRow, 0);
-             ViewFlightsJPanel panel = new ViewFlightsJPanel(UserProcessContainer,flight);
-             UserProcessContainer.add("ViewFlightsJPanel",panel);
-             CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
-             layout.next(UserProcessContainer);
+            
+            int airID = (int) ViewTable.getValueAt(selectedRow, 0);
+            Airliner airliner = this.travelAgency.getAirlinerDirectory().getAirlinerByID(airID);
+            ListviewFlight lf = new ListviewFlight(UserProcessContainer, this.travelAgency, this.travelAgency.getAirlinerDirectory().getAirlinerByID(airID).getSchedule(), airliner);
+            UserProcessContainer.add("ViewFlightsJPanel",lf);
+            CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+            layout.next(UserProcessContainer);
         }
     }//GEN-LAST:event_btnFlightsActionPerformed
 

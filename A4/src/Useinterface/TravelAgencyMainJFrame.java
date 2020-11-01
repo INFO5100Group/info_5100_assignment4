@@ -29,12 +29,12 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
      */
     public TravelAgencyMainJFrame() {
         this.travelAgency = new TravelAgency();
-        this.travelOffice = new TravelOffice();
-        this.masterTravelschedule = new MasterTravelSchedule();
+        this.travelOffice = this.travelAgency.getMasterTravelSchedule().getTravelOffice();
+        this.masterTravelschedule = this.travelAgency.getMasterTravelSchedule();
         initComponents();
         initData();
         
-        setSize(1000, 800);
+        setSize(1000, 1000);
     }
     
     private void initData(){
@@ -68,21 +68,21 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
 
         jSplitPane1.setDividerLocation(200);
 
-        btnAirliners.setText("CreateAirliners");
+        btnAirliners.setText("Airliners");
         btnAirliners.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAirlinersActionPerformed(evt);
             }
         });
 
-        btnFlight.setText("CreateFlight");
+        btnFlight.setText("Flights");
         btnFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFlightActionPerformed(evt);
             }
         });
 
-        btnCustomer.setText("Customer");
+        btnCustomer.setText("Customers");
         btnCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCustomerActionPerformed(evt);
@@ -122,11 +122,11 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1064, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
         );
 
         pack();
@@ -140,10 +140,8 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCustomerActionPerformed
 
     private void btnFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFlightActionPerformed
-        // TODO add your handling code here:
-        FlightSchedule mt = masterTravelschedule.getFlightSchedule();
-        CreateNewFlightsJPanel cnfp = new CreateNewFlightsJPanel(UserProcessContainer,masterTravelschedule);
-        UserProcessContainer.add("flightcreajpanel",cnfp);
+        ListviewFlight cnfp = new ListviewFlight(UserProcessContainer,travelAgency,this.travelAgency.getMasterTravelSchedule().getFlightSchedule(), null);
+        UserProcessContainer.add("flightsjpanel",cnfp);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
         layout.next(UserProcessContainer);
     }//GEN-LAST:event_btnFlightActionPerformed
@@ -151,7 +149,7 @@ public class TravelAgencyMainJFrame extends javax.swing.JFrame {
     private void btnAirlinersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAirlinersActionPerformed
         // TODO add your handling code here:
         AirlinerDirectory ad = travelAgency.getAirlinerDirectory();
-        CreateNewAirlinerJPanel cna = new CreateNewAirlinerJPanel(UserProcessContainer,travelAgency);
+        ManageAirlinersJPanel cna = new ManageAirlinersJPanel(UserProcessContainer,travelAgency);
         UserProcessContainer.add("CreateNewAirlinerJPanel",cna);
         CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
         layout.next(UserProcessContainer);

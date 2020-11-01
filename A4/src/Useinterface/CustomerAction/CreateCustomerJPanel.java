@@ -54,7 +54,7 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("宋体", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Customer schedule");
+        jLabel1.setText("Create Customer");
 
         jLabel3.setText("First Name");
 
