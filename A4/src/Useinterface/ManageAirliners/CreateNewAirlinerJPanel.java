@@ -8,6 +8,8 @@ package Useinterface.ManageAirliners;
 import Business.Airliner.Airliner;
 import Business.Persona.Customer;
 import Business.Travel.TravelAgency;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -111,13 +113,32 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String adress = jtxAdress.getText();    
         String name = jtxName.getText();
+        boolean c = usernamePatternCorrect();
+        boolean d = usernamePatternCorrect1();
+        if (c == true && d == true){
         Airliner al = new Airliner();
         al.setAdress(adress);
         al.setLinerName(name);
         travelAgency.getAirlinerDirectory().add(al);
         JOptionPane.showMessageDialog(null, "Customer successfuly created");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Data type Wrong, please creat again");
+        }
     }//GEN-LAST:event_btnCreateActionPerformed
-
+    private boolean usernamePatternCorrect() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}");
+         Matcher m = p. matcher(jtxAdress.getText()) ;
+         boolean b = m. matches();
+         return b;
+    }
+     private boolean usernamePatternCorrect1() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}");
+         Matcher m = p. matcher(jtxName.getText()) ;
+         boolean b = m. matches();
+         return b;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;

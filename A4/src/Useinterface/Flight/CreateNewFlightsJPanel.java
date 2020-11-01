@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -270,6 +272,8 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
         String arr = ComboAr.getSelectedItem().toString();
         String dep = ComboDe.getSelectedItem().toString();
         String times = comboHour.getSelectedItem().toString();
+        boolean c = PatternCorrect();
+        if(c == true){
         Flight flight = new Flight();
         flight.setFlightName(name);
         flight.setDestination(arr);
@@ -292,8 +296,17 @@ public class CreateNewFlightsJPanel extends javax.swing.JPanel {
             return;
         }
         JOptionPane.showMessageDialog(null, "Flight " +flight.getFlightName()+ " successfuly created");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Data type Wrong, please creat again");
+        } 
     }//GEN-LAST:event_btnCreateActionPerformed
-
+    private boolean PatternCorrect() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}");
+         Matcher m = p.matcher(jtxName.getText()) ;
+         boolean b = m.matches();
+         return b;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboAr;

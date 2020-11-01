@@ -142,8 +142,8 @@ public class InitEverything {
             for(Customer c : cd){
             custCount++;
             Seat s = new Seat(custCount);
-            s.setRowNum(custCount/4);
-            s.setColumnNum(custCount%4);
+            s.setRowNum(2);
+            s.setColumnNum(15);
             s.setLocation(seatLocation[custCount % 3]);
             Flight f = new Flight(flightNames[custCount % 4]);
             f.setDeparture(placeNames[custCount % 5]);

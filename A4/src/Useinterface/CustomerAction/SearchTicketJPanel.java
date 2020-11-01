@@ -49,13 +49,13 @@ public class SearchTicketJPanel extends javax.swing.JPanel {
         
         // combooBox seatCol
         CoColumn.removeAllItems();;
-        for(int i = 1; i < 51; i++){
+        for(int i = 1; i < 26; i++){
             CoColumn.addItem(i + "");
         }
         
         // combobox CoRow
         CoRow.removeAllItems();
-        for(int i = 1; i < 7; i++){
+        for(int i = 1; i < 3; i++){
             CoRow.addItem(i + "");
         }
         

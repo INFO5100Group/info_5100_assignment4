@@ -8,6 +8,8 @@ package Useinterface.CustomerAction;
 import Business.Persona.Customer;
 import Business.Travel.MasterTravelSchedule;
 import Business.Travel.TravelOffice;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -118,13 +120,38 @@ public class CreateCustomerJPanel extends javax.swing.JPanel {
         String firstName = jtxFname.getText();
         String lastName = jtxLname.getText();       
         String gender = jtxGender.getText();
+        boolean c = PatternCorrect();
+        boolean d = PatternCorrect1();
+        boolean f = PatternCorrect2();
+        if(c == true && d == true && f == true){
         Customer cus = travelOffice.getCustomerDirecotry().addCustomer(firstName, lastName, gender);
         cus.setFName(firstName);
         cus.setGender(gender);
         cus.setLName(lastName);
         JOptionPane.showMessageDialog(null, "Customer successfuly created");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Data type Wrong, please creat again");
+        } 
     }//GEN-LAST:event_btnCreateActionPerformed
-
+    private boolean PatternCorrect() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z][-A-Za-z]+\\.)+[A-Za-z]{2,14}");
+         Matcher m = p.matcher(jtxFname.getText()) ;
+         boolean b = m.matches();
+         return b;
+    }
+    private boolean PatternCorrect1() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z][-A-Za-z]+\\.)+[A-Za-z]{2,14}");
+         Matcher m = p.matcher(jtxLname.getText()) ;
+         boolean b = m.matches();
+         return b;
+    }
+    private boolean PatternCorrect2() {
+         Pattern p = Pattern.compile("\\w[-\\w.+]*@([A-Za-z][-A-Za-z]+\\.)+[A-Za-z]{4,9}");
+         Matcher m = p.matcher(jtxGender.getText()) ;
+         boolean b = m.matches();
+         return b;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
