@@ -13,6 +13,7 @@ import Business.EcoSystem;
 import Business.Organization;
 import static Business.Organization.Type.DeliveryMan;
 import Business.Restaurant.Restaurant;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -30,10 +31,12 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
+    private UserAccount account;
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,UserAccount account,EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer=userProcessContainer;
         this.ecosystem=ecosystem;
+        this.account = account;
         populateTree();
     }
     
@@ -198,7 +201,7 @@ DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
 
     private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
 
-        ManageCustomerJPanel manageCustomerJPanel=new ManageCustomerJPanel(userProcessContainer,ecosystem);
+        ManageCustomerJPanel manageCustomerJPanel=new ManageCustomerJPanel(userProcessContainer,account,ecosystem);
         userProcessContainer.add("manageCustomerJPanel",manageCustomerJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

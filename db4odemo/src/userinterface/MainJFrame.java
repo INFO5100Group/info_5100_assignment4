@@ -7,9 +7,14 @@ package userinterface;
 import Business.Customer.Customer;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
+import Business.Employee.Employee;
 
 import Business.Organization;
 import Business.OrganizationDirectory;
+import Business.Role.CustomerRole;
+import Business.Role.DeliverManRole;
+import Business.Role.RestaurantRole;
+import Business.Role.SystemAdminRole;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -124,12 +129,23 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        // Get user name
+        Employee employee1 = system.getEmployeeDirectory().createEmployee("RRH1");
+        Employee employee2 = system.getEmployeeDirectory().createEmployee("RRH2");
+        Employee employee3 = system.getEmployeeDirectory().createEmployee("RRH3");
+        UserAccount ub = system.getUserAccountDirectory().createUserAccount("deliverman", "deliverman", employee1, new DeliverManRole());
+        UserAccount uc = system.getUserAccountDirectory().createUserAccount("restaurant", "restaurant", employee2, new RestaurantRole());
+        UserAccount ud = system.getUserAccountDirectory().createUserAccount("customer", "customer", employee3, new CustomerRole());
+        
+
+
+       // Get user name
         String us = userNameJTextField.getText();
      //   Customer customer = new Customer();
         String pw = new String(passwordField.getPassword());
+       // System.out.print(system.getUserAccountDirectory().getUserAccountList());
         UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(us, pw);
-      OrganizationDirectory orgDir = new OrganizationDirectory();
+        //System.out.print(userAccount);
+        OrganizationDirectory orgDir = new OrganizationDirectory();
         Organization inOrganization = null;
     /*    if(userAccount==null){
                     userAccount=system.getUserAccountDirectory().authenticateUser(us, pw);

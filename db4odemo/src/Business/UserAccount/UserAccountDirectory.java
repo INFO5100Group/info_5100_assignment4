@@ -31,6 +31,13 @@ public class UserAccountDirectory {
             }
         return null;
     }
+        public UserAccount getuserAccountbyName(String userName){
+        for(UserAccount u: userAccountList)
+          if(u.getUsername().equals(userName)){
+              return u;
+          }
+        return null;        
+    }
     
     public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
         UserAccount userAccount = new UserAccount();

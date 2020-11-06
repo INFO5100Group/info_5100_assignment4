@@ -1,6 +1,9 @@
 package Business;
 
+import Business.Customer.CustomerDirectory;
+import Business.DeliveryMan.DeliveryManDirectory;
 import Business.Employee.Employee;
+import Business.Restaurant.RestaurantDirectory;
 import Business.Role.CustomerRole;
 import Business.Role.DeliverManRole;
 import Business.Role.RestaurantRole;
@@ -16,7 +19,10 @@ public class ConfigureASystem {
     public static EcoSystem configure(){
         
         EcoSystem system = EcoSystem.getInstance();
-        
+        system.setCustomerDirectory(new CustomerDirectory());
+        system.setDeliveryManDirectory(new DeliveryManDirectory());
+        system.setRestaurantDirectory(new RestaurantDirectory());
+        System.out.print(1);
         //Create a network
         //create an enterprise
         //initialize some organizations
@@ -25,13 +31,9 @@ public class ConfigureASystem {
         
         
         Employee employee = system.getEmployeeDirectory().createEmployee("RRH");
-        Employee employee1 = system.getEmployeeDirectory().createEmployee("RRH1");
-        Employee employee2 = system.getEmployeeDirectory().createEmployee("RRH2");
-        Employee employee3 = system.getEmployeeDirectory().createEmployee("RRH3");
+
         UserAccount ua = system.getUserAccountDirectory().createUserAccount("sysadmin", "sysadmin", employee, new SystemAdminRole());
-        UserAccount ub = system.getUserAccountDirectory().createUserAccount("deliverman", "deliverman", employee1, new DeliverManRole());
-        UserAccount uc = system.getUserAccountDirectory().createUserAccount("restaurant", "restaurant", employee2, new RestaurantRole());
-        UserAccount ud = system.getUserAccountDirectory().createUserAccount("customer", "customer", employee3, new CustomerRole());
+
         return system;
     }
     

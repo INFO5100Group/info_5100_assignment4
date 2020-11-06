@@ -19,23 +19,36 @@ import javax.swing.table.DefaultTableModel;
 public class CustomerAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-
+    private EcoSystem ecosystem;
     private UserAccount userAccount;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account) {
+    public CustomerAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
-      
+        this.ecosystem = ecosystem;
         this.userAccount = account;
-        //valueLabel.setText(enterprise.getName());
+        valueLabel.setText(account.getUsername());
         populateRequestTable();
     }
     
     public void populateRequestTable(){
+          DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         
+        model.setRowCount(0);
+        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[5];
+            row[0] = request.getReceiver();
+            row[1] = request.getFood();
+            row[2] = request.getStatus();
+            row[3] = request.getDeliverMan();
+            row[4] = request.getMessage();               
+            model.addRow(row);
+        }
+    
+
     }
 
     
@@ -50,27 +63,27 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
-        requestTestJButton = new javax.swing.JButton();
+        orderFoodbtn = new javax.swing.JButton();
         refreshTestJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Message", "Receiver", "Status", "Result"
+                "Restaurant", "Food", "Status", "DeliverMan", "Comment"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -85,14 +98,12 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
             workRequestJTable.getColumnModel().getColumn(0).setResizable(false);
             workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(2).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        requestTestJButton.setText("Request Test");
-        requestTestJButton.addActionListener(new java.awt.event.ActionListener() {
+        orderFoodbtn.setText("Order food");
+        orderFoodbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                requestTestJButtonActionPerformed(evt);
+                orderFoodbtnActionPerformed(evt);
             }
         });
 
@@ -104,7 +115,7 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         });
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("EnterPrise :");
+        enterpriseLabel.setText("Customer :");
 
         valueLabel.setText("<value>");
 
@@ -112,23 +123,22 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(179, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(requestTestJButton)
-                        .addGap(86, 86, 86))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addComponent(refreshTestJButton)
                 .addGap(103, 103, 103))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(284, 284, 284)
+                .addComponent(orderFoodbtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,17 +151,19 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(requestTestJButton)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
+                .addComponent(orderFoodbtn)
+                .addGap(104, 104, 104))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
+    private void orderFoodbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderFoodbtnActionPerformed
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("OrderJPanel", new OrderJPanel(userProcessContainer, userAccount,ecosystem));
+        layout.next(userProcessContainer);    
         
         
-        
-    }//GEN-LAST:event_requestTestJButtonActionPerformed
+    }//GEN-LAST:event_orderFoodbtnActionPerformed
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
 
@@ -162,8 +174,8 @@ public class CustomerAreaJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton orderFoodbtn;
     private javax.swing.JButton refreshTestJButton;
-    private javax.swing.JButton requestTestJButton;
     private javax.swing.JLabel valueLabel;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables

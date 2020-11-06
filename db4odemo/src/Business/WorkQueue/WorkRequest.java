@@ -19,6 +19,9 @@ public abstract class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private String comment;
+    private UserAccount deliverMan;
+    private String food;
     
     public WorkRequest(){
         requestDate = new Date();
@@ -71,4 +74,31 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public UserAccount getDeliverMan() {
+        return deliverMan;
+    }
+
+    public void setDeliverMan(UserAccount deliverMan) {
+        this.deliverMan = deliverMan;
+    }
+
+
+
+    public String getFood() {
+        return food;
+    }
+
+    public void setFood(String food) {
+        this.food = food;
+    }
+    
 }

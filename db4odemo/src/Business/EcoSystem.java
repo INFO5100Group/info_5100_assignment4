@@ -61,6 +61,18 @@ public class EcoSystem extends Organization{
         return deliveryManDirectory;
     }
 
+    public void setRestaurantDirectory(RestaurantDirectory restaurantDirectory) {
+        this.restaurantDirectory = restaurantDirectory;
+    }
+
+    public void setCustomerDirectory(CustomerDirectory customerDirectory) {
+        this.customerDirectory = customerDirectory;
+    }
+
+    public void setDeliveryManDirectory(DeliveryManDirectory deliveryManDirectory) {
+        this.deliveryManDirectory = deliveryManDirectory;
+    }
+
     
     public boolean checkIfUserIsUnique(String userName){
        //

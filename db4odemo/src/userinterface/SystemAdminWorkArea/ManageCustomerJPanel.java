@@ -27,24 +27,29 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
      */
     private JPanel container;
     private EcoSystem ecosystem;
+    private UserAccount account;
     //private CustomerDirectory customerDir;
-    public ManageCustomerJPanel(JPanel container,EcoSystem ecosystem) {
+    public ManageCustomerJPanel(JPanel container,UserAccount account,EcoSystem ecosystem) {
         initComponents();
         this.container = container;
        // this.customerDir = customerDir;
+       this.account = account;
        this.ecosystem = ecosystem;
+       popData();
     }
 
     
 
     public void popData() {
         OrganizationDirectory orgDir = new OrganizationDirectory();
-       // CustomerDirectory customerDir = new CustomerDirectory();
+        CustomerDirectory customerDir = new CustomerDirectory();
        // Customer customer = (Customer)customerDir.createAndAddCustomer();
         Organization org = (Organization)orgDir.createOrganization(Organization.Type.Customer);
         DefaultTableModel model = (DefaultTableModel) userJTable.getModel();
-        model.setRowCount(0);
-        for (Customer c : ecosystem.getCustomerDirectory()) {
+        model.setRowCount(0); 
+        //ecosystem.getCustomerDirectory().getCustomerList()
+        
+        for (Customer c : customerDir.getCustomerList()) {
                 Object row[] = new Object[1];
                 row[0] = c;
                // row[1] = c;
@@ -79,6 +84,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         passwordJTextField = new javax.swing.JTextField();
         backjButton1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         createUserJButton.setText("Create");
         createUserJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,31 +134,39 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(205, 205, 205)
-                                .addComponent(createUserJButton)))))
+                .addGap(184, 184, 184)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(152, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(205, 205, 205)
+                        .addComponent(createUserJButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(48, 48, 48))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +187,9 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
                         .addComponent(backjButton1)
                         .addGap(24, 24, 24))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(createUserJButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(createUserJButton)
+                            .addComponent(btnDelete))
                         .addGap(44, 44, 44))))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -181,11 +197,11 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
         String userName = nameJTextField.getText();
         String password = passwordJTextField.getText();
-        OrganizationDirectory orgDir = new OrganizationDirectory();
-        CustomerDirectory customerDir = new CustomerDirectory();
-       // Customer customer = (Customer)customerDir.createAndAddCustomer();
+     //   OrganizationDirectory orgDir = new OrganizationDirectory();
+       CustomerDirectory customerDir = new CustomerDirectory();
+      //  Customer customer = (Customer)ecosystem.getCustomerDirectory().createAndAddCustomer();
        Customer customer = new Customer();
-        Organization org = (Organization)orgDir.createOrganization(Organization.Type.Customer);
+      //  Organization org = (Organization)orgDir.createOrganization(Organization.Type.Customer);
         customer.setName(userName);
         customerDir.add(customer);
         Employee employee = customer.getEmployeeDirectory().createEmployee(userName);        
@@ -202,8 +218,13 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         layout.previous(container);
     }//GEN-LAST:event_backjButton1ActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backjButton1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton createUserJButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
